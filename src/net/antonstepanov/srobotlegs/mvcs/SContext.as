@@ -17,11 +17,12 @@ package net.antonstepanov.srobotlegs.mvcs
 	public class SContext extends Context
 	{
 		protected var _contextStarlingView : StarlingContextView;
-		
+				
 		private var starlingInitialized : Boolean = false;
 		private var autoStartup : Boolean = false;
 		private var startStarling : Boolean = true;
-
+		private var startWhenStarlingInitComplete:Boolean=false;
+		
 		public function SContext(contextView : DisplayObjectContainer = null, autoStartup : Boolean = true, startStarling : Boolean = true)
 		{
 			this.startStarling = startStarling;
@@ -30,7 +31,6 @@ package net.antonstepanov.srobotlegs.mvcs
 
 			if (startStarling)
 			{
-				
 				//check if starling already exists				
 				if (Starling.current)
 				{
@@ -68,7 +68,7 @@ package net.antonstepanov.srobotlegs.mvcs
 			else
 			{
 				// starling not yet initialized, but startup was called
-				autoStartup = true;
+				startWhenStarlingInitComplete = true;
 			}
 		}
 
@@ -105,6 +105,10 @@ package net.antonstepanov.srobotlegs.mvcs
 			if (autoStartup)
 			{
 				startup();
+			}
+			else if (startWhenStarlingInitComplete)
+			{
+				super.startup();
 			}
 		}
 

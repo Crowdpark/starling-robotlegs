@@ -21,7 +21,10 @@ package net.antonstepanov.srobotlegs.mvcs
 		{
 			return _instance;
 		}
-
+		public static function dispose():void 
+		{
+			_instance=null;
+		}
 		
 	}
 }

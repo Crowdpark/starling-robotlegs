@@ -19,10 +19,10 @@ package net.antonstepanov.srobotlegs.mvcs
 	{
 		protected var _contextStarlingView : StarlingContextView;
 				
-		private var starlingInitialized : Boolean = false;
-		private var autoStartup : Boolean = false;
-		private var startStarling : Boolean = true;
-		private var startWhenStarlingInitComplete:Boolean=false;
+		protected var starlingInitialized : Boolean = false;
+		protected var autoStartup : Boolean = false;
+		protected var startStarling : Boolean = true;
+		protected var startWhenStarlingInitComplete:Boolean=false;
 		
 		public function SContext(contextView : DisplayObjectContainer = null, autoStartup : Boolean = true, startStarling : Boolean = true)
 		{
@@ -72,7 +72,17 @@ package net.antonstepanov.srobotlegs.mvcs
 				startWhenStarlingInitComplete = true;
 			}
 		}
-
+		
+		
+		override public function shutdown() : void
+		{
+			_contextStarlingView=null;
+			injector.unmap(StarlingContextView);
+			SMediatorMap(mediatorMap).contextStarlingView=null;
+			
+			super.shutdown();
+		}
+		
 		protected function createStarling() : void
 		{
 			Starling.handleLostContext = true;

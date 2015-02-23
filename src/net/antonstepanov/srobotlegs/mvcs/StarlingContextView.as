@@ -1,8 +1,8 @@
 package net.antonstepanov.srobotlegs.mvcs
 {
-	import starling.display.Sprite;
+    import starling.display.Sprite;
 
-	/**
+    /**
 	 * @author antonstepanov
 	 * @creation date Jul 4, 2012
 	 */
